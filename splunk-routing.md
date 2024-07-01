@@ -70,21 +70,21 @@ TRANSFORMS-routing = set_routing_tenant_id
 ```ini
 [set_routing_tenant_id]
 REGEX = .(<domain_ID>)
-FORMAT = tenant_id_group, ime-indexers
+FORMAT = tenant_id_group, group-indexers
 DEST_KEY = _TCP_ROUTING
 ```
 #### outputs.conf
 ```ini
-defaultGroup = ime-indexers
+defaultGroup = group-indexers
 indexAndForward = true
 autoLBFrequency = 30
 clientCert = /path
 sslCertPath = /path
 sslRootCAPath = /path
 
-# Becuase ime-indexers is the "defaultGroup" it will get ALL logs but notice in transforms.conf we also had to specify the "ime-indexers" group in the "set_routing_tenant_id" block. If not there the deaultGroup will NOT recieve the filtered logs getting sent to indexer02.
+# Becuase group-indexers is the "defaultGroup" it will get ALL logs but notice in transforms.conf we also had to specify the "group-indexers" group in the "set_routing_tenant_id" block. If not there the deaultGroup will NOT recieve the filtered logs getting sent to indexer02.
 
-[tcpout:ime-indexers]
+[tcpout:group-indexers]
 server = indexer01:9997
 sslCertPath = /path
 sslRootCAPath = /path
